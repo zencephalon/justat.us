@@ -48,7 +48,7 @@ if (Meteor.isServer) {
       return Facets.find({});
     });
     Meteor.publish("invites", function() {
-      return Facets.find({to: this.userId});
+      return Invites.find({to: this.userId});
     });
     // Meteor.publish("user_trees", function() {
     //   return Trees.find({uid: this.userId});
