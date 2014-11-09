@@ -4,6 +4,7 @@ Template.add.events({
     var email = $(event.target).children('input').eq(0).val();
     Meteor.call('addInvite', email, function (error, result) {
       console.log(result);
+      $('#add-result').html(result);
     });
     event.target.reset();
   }
