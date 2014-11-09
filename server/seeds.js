@@ -21,10 +21,11 @@ if (Meteor.isServer) {
       }
 
       user = Meteor.users.findOne({'profile.email': email});
+      from_user = Meteor.user();
 
       if (user) {
         console.log(user);
-        Invite.create({from: this.userId, to: user._id});
+        Invite.create({from: this.userId, to: user._id, from_email: from_user['profile']['email']});
         return "Invite sent!"
       } else {
         return "No such user found."
