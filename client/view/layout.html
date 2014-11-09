@@ -1,0 +1,17 @@
+<template name="layout">
+<head>
+  <title>self-mastree</title>
+  <link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <div id="content">
+    <header>
+      <a href="/"><img src="/zenchinese.png" class="logo"/></a>
+      {{> loginButtons}}
+    </header>
+
+    {{> yield}}
+  </div>
+</body>
+</template>
