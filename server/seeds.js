@@ -20,9 +20,10 @@ if (Meteor.isServer) {
         "Must be logged in to add a friend.");
       }
 
-      user = Meteor.users.find({'profile.email': email});
+      user = Meteor.users.findOne({'profile.email': email});
 
       if (user) {
+        console.log(user);
         Invite.create({from: this.userId, to: user._id});
         return "Invite sent!"
       } else {
