@@ -7,6 +7,9 @@ Facet = function(o) {
 }
 
 Facet.create = function(o) {
+  if (o['friends'] === undefined) {
+    o['friends'] = [];
+  }
   id = Facets.insert(o);
   o['_id'] = id;
 
