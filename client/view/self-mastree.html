@@ -1,20 +1,7 @@
 <template name="/">
-<head>
-  <title>self-mastree</title>
-  <link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
-</head>
+  {{#if currentUser}}
 
-<body>
-  <div id="content">
-    <header>
-      <a href="/"><img src="/zenchinese.png" class="logo"/></a>
-      {{> loginButtons}}
-    </header>
-    {{#if currentUser}}
-
-    {{else}}
-    Login or create an account to use Self-Mastree.
-    {{/if}}
-  </div>
-</body>
+  {{else}}
+  Login or create an account to use Self-Mastree.
+  {{/if}}
 </template>
