@@ -8,6 +8,14 @@ Router.route('/', {
   }
 });
 
+Router.route('/add', {
+  onBefore: function() {
+  },
+  action: function() {
+    this.render("add");
+  }
+})
+
 Router.route('/t/:_id/inc', function () {
   var req = this.request;
   var res = this.response;
