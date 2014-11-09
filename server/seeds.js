@@ -3,15 +3,36 @@ function dropData() {
 }
 
 function seedData() {
-  //uid = Accounts.createUser({email: "mkbunday@gmail.com", password: "zen"});
+  uid = Accounts.createUser({email: "mkbunday@gmail.com", password: "zen"});
+  uid = Accounts.createUser({email: "djjcu2115@gmail.com", password: "zen"});
+  uid = Accounts.createUser({email: "matt@matt.com", password: "zen"});
+  uid = Accounts.createUser({email: "daria@daria.com", password: "zen"});
+  uid = Accounts.createUser({email: "mike@mike.com", password: "zen"});
 }
 
 if (Meteor.isServer) {
+  Meteor.methods({
+    addInvite: function(email) {
+      check(email, String);
+
+      if (! this.userId) {
+        throw new Meteor.Error("not-logged-in",
+        "Must be logged in to add a friend.");
+      }
+
+      user = Meteor.users.find({'profile.email': email});
+
+      if (user) {
+        Invite.create({from: this.userId, to: user._id});
+      }
+    }
+  })
+
   Accounts.onCreateUser(function(options, user) {
     console.log(options);
     console.log(user);
     Facet.create({name: options.email, uid: user._id});
-    user['profile'] = {};
+    user['profile'] = {email: options.email};
     return user;
   });
 
@@ -20,6 +41,9 @@ if (Meteor.isServer) {
     //seedData();
     Meteor.publish("facets", function() {
       return Facets.find({});
+    });
+    Meteor.publish("invites", function() {
+      return Facets.find({to: this.userId});
     });
     // Meteor.publish("user_trees", function() {
     //   return Trees.find({uid: this.userId});
