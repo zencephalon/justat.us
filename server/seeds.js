@@ -24,6 +24,9 @@ if (Meteor.isServer) {
 
       if (user) {
         Invite.create({from: this.userId, to: user._id});
+        return "Invite sent!"
+      } else {
+        return "No such user found."
       }
     }
   })
