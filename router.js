@@ -8,7 +8,7 @@ Router.route('/', {
     return [Meteor.subscribe("facets"), Meteor.subscribe("invites")];
   },
   action: function() {
-    this.render("/");
+    this.render("root");
   }
 });
 
