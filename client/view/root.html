@@ -1,7 +1,7 @@
 <template name="root">
   {{#if currentUser}}
     {{#each invites}}
-      {{from_email}}
+      {{> invite}}
     {{/each}}
   {{else}}
   Login or create an account to use Self-Mastree.
