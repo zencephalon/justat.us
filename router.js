@@ -5,7 +5,7 @@ Router.configure({
 Router.route('/', {
   waitOn: function() {
     //return Meteor.subscribe("user_trees");
-    return [Meteor.subscribe("friends"), Meteor.subscribe("invites")];
+    return [Meteor.subscribe("friends"), Meteor.subscribe("facets"), Meteor.subscribe("invites")];
   },
   action: function() {
     this.render("root");
