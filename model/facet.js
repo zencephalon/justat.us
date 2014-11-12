@@ -6,6 +6,10 @@ Facet = function(o) {
   }
 }
 
+Facet.findOne = function(o) {
+  return new Facet(Facets.findOne(o));
+}
+
 Facet.create = function(o) {
   if (o['friends'] === undefined) {
     o['friends'] = [];
@@ -14,4 +18,23 @@ Facet.create = function(o) {
   o['_id'] = id;
 
   return new Facet(o);
+}
+
+Facet.prototype.addFriend = function(facet) {
+  this.friends.push(facet._id);
+  this.update({"$set": {friends: _(this.friends).uniq()}});
+}
+
+Facet.prototype.update = function(update) {
+  if (update === undefined) {
+    o = {};
+    for (p in this) {
+      if (p != '_id') {
+        o[p] = this[p];
+      }
+    }
+    Facets.update(this._id, {"$set": o});
+  } else {
+    Facets.update(this._id, update);
+  }
 }
