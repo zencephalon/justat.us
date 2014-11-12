@@ -9,5 +9,9 @@ User.prototype.current_facet = function() {
 }
 
 User.prototype.facets = function() {
-  return this['profile']['facets'];
+  if (this['profile']) {
+    if (this['profile']['facets']) {
+      return this['profile']['facets'];
+    }
+  }
 }
