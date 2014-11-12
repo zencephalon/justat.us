@@ -61,16 +61,22 @@ if (Meteor.isServer) {
     //seedData();
     Meteor.publish("facets", function() {
       user = User.findOne(this.userId);
-      return Facets.find({"_id": {"$in": user.facet_ids()}})
+      if (user) {
+        return Facets.find({"_id": {"$in": user.facet_ids()}})
+      }
     });
     Meteor.publish("friends", function() {
       user = User.findOne(this.userId);
-      friends = _.union.apply(this, _(user.facet_ids()).map(function(id) {f = Facet.findOne(id); return f.friends}));
-      console.log(friends);
-      return Facets.find({"_id": {"$in": friends}});
+      if (user) {
+        friends = _.union.apply(this, _(user.facet_ids()).map(function(id) {f = Facet.findOne(id); return f.friends}));
+        console.log(friends);
+        return Facets.find({"_id": {"$in": friends}});
+      }
     });
     Meteor.publish("invites", function() {
-      return Invites.find({to: this.userId});
+      if (this.userId) {
+        return Invites.find({to: this.userId});
+      }
     });
   })
 }
