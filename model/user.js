@@ -11,7 +11,12 @@ User.prototype.current_facet = function() {
 User.prototype.setStatus = function(status) {
   this.current_facet().setStatus(status);
 }
+
 User.prototype.facets = function() {
+  return _(this.facet_ids()).map(function(id) { return Facet.findOne(id) });
+}
+
+User.prototype.facet_ids = function() {
   if (this['profile']) {
     if (this['profile']['facets']) {
       return this['profile']['facets'];

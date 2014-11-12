@@ -60,11 +60,12 @@ if (Meteor.isServer) {
     //dropData();
     //seedData();
     Meteor.publish("facets", function() {
-      //return Facets.find({});
+      user = User.findOne(this.userId);
+      return Facets.find({"_id": {"$in": user.facet_ids()}})
     });
     Meteor.publish("friends", function() {
       user = User.findOne(this.userId);
-      friends = _.union.apply(this, _(user.facets()).map(function(id) {f = Facet.findOne(id); return f.friends}));
+      friends = _.union.apply(this, _(user.facet_ids()).map(function(id) {f = Facet.findOne(id); return f.friends}));
       console.log(friends);
       return Facets.find({"_id": {"$in": friends}});
     });
