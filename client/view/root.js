@@ -3,6 +3,9 @@ Template.root.helpers({
     return Invites.find({});
   },
   facets: function() {
-    return Facets.find({});
+    return User.current().current_facet().friend_facets();
+  },
+  user: function() {
+    return User.current();
   }
 })

@@ -22,6 +22,10 @@ Facet.prototype.addFriend = function(facet) {
   this.update({"$set": {friends: _(this.friends).uniq()}});
 }
 
+Facet.prototype.friend_facets = function() {
+  return _(this.friends).map(function(id) { return Facet.findOne(id) });
+}
+
 Facet.prototype.update = function(update) {
   if (update === undefined) {
     o = {};
