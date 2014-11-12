@@ -1,12 +1,4 @@
-User = function(o) {
-  for (p in o) {
-    this[p] = o[p];
-  }
-}
-
-User.findOne = function(id) {
-  return new User(Meteor.users.findOne(id));
-}
+User = Model(Meteor.users);
 
 User.current = function() {
   return new User(Meteor.user());

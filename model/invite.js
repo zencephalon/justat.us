@@ -8,9 +8,9 @@ Invite = Model(Invites);
 //   }
 // }
 
-// Invite.create = function(o) {
-//   id = Invites.insert(o);
-//   o['_id'] = id;
+Invite.create = function(o) {
+  id = Invites.insert(o);
+  o['_id'] = id;
 
-//   return new Invite(o);
-// }
+  return new Invite(o);
+}

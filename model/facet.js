@@ -1,10 +1,6 @@
 Facets = new Meteor.Collection("facets");
 
-Facet = function(o) {
-  for (p in o) {
-    this[p] = o[p];
-  }
-}
+Facet = Model(Facets);
 
 Facet.findOne = function(id) {
   return new Facet(Facets.findOne(id));
