@@ -33,6 +33,11 @@ Facet.create = function(o) {
   return new Facet(o);
 }
 
+Facet.prototype.setStatus = function(status) {
+  this.status = status;
+  this.update({"$set": {status: this.status}});
+}
+
 Facet.prototype.addFriend = function(facet) {
   this.friends.push(facet._id);
   this.update({"$set": {friends: _(this.friends).uniq()}});
