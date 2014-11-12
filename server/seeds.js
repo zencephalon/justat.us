@@ -17,10 +17,16 @@ if (Meteor.isServer) {
       user = User.findOne(invite.to);
       from_facet = Facet.findOne(invite.from_facet);
       to_facet = user.current_facet();
+
       to_facet.addFriend(from_facet);
       from_facet.addFriend(to_facet);
+      
       Invites.remove(invite_id);
-      return "Added!"
+      return "Added!";
+    },
+    declineInvite: function(invite_id) {
+      Invites.remove(invite_id);
+      return "Declined!";
     },
     addInvite: function(email) {
       check(email, String);
