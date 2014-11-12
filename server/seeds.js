@@ -12,6 +12,10 @@ function seedData() {
 
 if (Meteor.isServer) {
   Meteor.methods({
+    acceptInvite: function(invite_id) {
+      invite = Invites.findOne(invite_id);
+      
+    },
     addInvite: function(email) {
       check(email, String);
 
@@ -24,7 +28,6 @@ if (Meteor.isServer) {
       from_user = Meteor.user();
 
       if (user) {
-        console.log(user);
         Invite.create({from: this.userId, to: user._id, from_email: from_user['profile']['email']});
         return "Invite sent!"
       } else {
