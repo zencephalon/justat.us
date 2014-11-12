@@ -14,7 +14,10 @@ if (Meteor.isServer) {
   Meteor.methods({
     acceptInvite: function(invite_id) {
       invite = Invites.findOne(invite_id);
-      
+      user = Meteor.users.findOne(invite.to);
+      from_facet = Facets.findOne(invite.from_facet);
+      //to_facet = 
+      console.log(invite);
     },
     addInvite: function(email) {
       check(email, String);
@@ -28,7 +31,7 @@ if (Meteor.isServer) {
       from_user = Meteor.user();
 
       if (user) {
-        Invite.create({from: this.userId, to: user._id, from_email: from_user['profile']['email']});
+        Invite.create({from_facet: from_user['profile']['current_facet'], to: user._id, from_email: from_user['profile']['email']});
         return "Invite sent!"
       } else {
         return "No such user found."
@@ -39,8 +42,8 @@ if (Meteor.isServer) {
   Accounts.onCreateUser(function(options, user) {
     console.log(options);
     console.log(user);
-    Facet.create({name: options.email, uid: user._id});
-    user['profile'] = {email: options.email};
+    facet = Facet.create({name: options.email, uid: user._id});
+    user['profile'] = {email: options.email, current_facet: facet._id, facets: [facet._id]};
     return user;
   });
 
@@ -53,11 +56,5 @@ if (Meteor.isServer) {
     Meteor.publish("invites", function() {
       return Invites.find({to: this.userId});
     });
-    // Meteor.publish("user_trees", function() {
-    //   return Trees.find({uid: this.userId});
-    // });
-    // Meteor.publish("tree", function(_id) {
-    //   return Trees.find({_id: _id});
-    // });
   })
 }
