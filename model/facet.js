@@ -6,8 +6,8 @@ Facet = function(o) {
   }
 }
 
-Facet.findOne = function(o) {
-  return new Facet(Facets.findOne(o));
+Facet.findOne = function(id) {
+  return new Facet(Facets.findOne(id));
 }
 
 Facet.create = function(o) {
