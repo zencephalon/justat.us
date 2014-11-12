@@ -12,6 +12,7 @@ Facet.create = function(o) {
   }
   id = Facets.insert(o);
   o['_id'] = id;
+  o['status'] = {color: "blue", text: "Let's make plans!"};
 
   return new Facet(o);
 }
