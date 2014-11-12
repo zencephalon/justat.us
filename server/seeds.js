@@ -14,10 +14,13 @@ if (Meteor.isServer) {
   Meteor.methods({
     acceptInvite: function(invite_id) {
       invite = Invites.findOne(invite_id);
-      user = Meteor.users.findOne(invite.to);
-      from_facet = Facets.findOne(invite.from_facet);
-      //to_facet = 
-      console.log(invite);
+      user = User.findOne(invite.to);
+      from_facet = Facet.findOne(invite.from_facet);
+      to_facet = user.current_facet();
+      to_facet.addFriend(from_facet);
+      from_facet.addFriend(to_facet);
+      Invites.remove(invite_id);
+      return "Added!"
     },
     addInvite: function(email) {
       check(email, String);
