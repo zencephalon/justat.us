@@ -1,8 +1,6 @@
 Template.status_buttons.events({
   'click #status-red': function(event) {
-    console.log("red");
     u = User.current();
-    console.log(u);
     u.setStatus({color: 'red', text: 'Concentrating, sorry.'})
   },
   'click #status-yellow': function(event) {
