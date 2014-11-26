@@ -34,7 +34,13 @@ Facet.create = function(o) {
 }
 
 Facet.prototype.setStatus = function(status) {
-  this.status = status;
+  if (status['color']) {
+    this.status['color'] = status['color'];
+  }
+  if (status['text']) {
+    this.status['text'] = status['text'];
+  }
+  console.log(this.status);
   this.update({"$set": {status: this.status}});
 }
 
