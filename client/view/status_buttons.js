@@ -20,12 +20,11 @@ Template.status_buttons.events({
     $('input[name=status_text]').focus();
   },
   'submit #user_status': function(event) {
-    console.log("HELLO");
     event.preventDefault();
     User.current().setStatus({text: $(event.target).children('input').val()});
   },
   'focus input[name=status_text]': function(event) {
-    $(event.target).select();
+    event.target.setSelectionRange(0, 9999);
   },
   'blur input[name=status_text]': function(event) {
     User.current().setStatus({text: $(event.target).val()});
