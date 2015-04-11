@@ -40,7 +40,14 @@ footer { font-size: 0.7em; margin-top: 2em;}
   float: right;
 }
 
+#button_table {
+  width: auto;
+  margin: 0px;
+  padding: 0px;
+}
+
 .status_buttons {
+  width: 100%;
   position: fixed;
   bottom: 0px;
 }
