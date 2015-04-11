@@ -26,9 +26,11 @@ Facet.create = function(o) {
   if (o['friends'] === undefined) {
     o['friends'] = [];
   }
+
+  o['status'] = {color: "blue", text: "Let's make plans!"};
+
   id = Facets.insert(o);
   o['_id'] = id;
-  o['status'] = {color: "blue", text: "Let's make plans!"};
 
   return new Facet(o);
 }
