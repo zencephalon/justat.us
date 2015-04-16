@@ -3,11 +3,14 @@ function dropData() {
 }
 
 function seedData() {
-  uid = Accounts.createUser({email: "mkbunday@gmail.com", password: "zen"});
-  uid = Accounts.createUser({email: "djjcu2115@gmail.com", password: "zen"});
+  var daria = User.findOne(Accounts.createUser({email: "djjcu2115@gmail.com", password: "zen"}));
   uid = Accounts.createUser({email: "matt@matt.com", password: "zen"});
   uid = Accounts.createUser({email: "daria@daria.com", password: "zen"});
   uid = Accounts.createUser({email: "mike@mike.com", password: "zen"});
+  var matt = User.findOne(Accounts.createUser({email: "mkbunday@gmail.com", password: "zen"}));
+
+  matt.current_facet().addFriend(daria.current_facet())
+  daria.current_facet().addFriend(matt.current_facet())
 }
 
 if (Meteor.isServer) {
@@ -57,8 +60,8 @@ if (Meteor.isServer) {
   });
 
   Meteor.startup(function () {
-    //dropData();
-    //seedData();
+    dropData();
+    seedData();
     Meteor.publish("facets", function() {
       user = User.findOne(this.userId);
       if (user) {
