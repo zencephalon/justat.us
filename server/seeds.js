@@ -65,8 +65,10 @@ if (Meteor.isServer) {
   });
 
   Meteor.startup(function () {
-    dropData();
-    seedData();
+    // dropData();
+    if (Meteor.users.find().count() == 0) {
+      seedData();
+    }
     Meteor.publish("facets", function() {
       user = User.findOne(this.userId);
       if (user) {
