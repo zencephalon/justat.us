@@ -8,6 +8,10 @@ User.createSeedUser = function(email) {
   return User.findOne(Accounts.createUser({email: email, password: "zen"}));
 }
 
+User.prototype.addFriend = function(facet) {
+  this.current_facet().addFriend(facet);
+}
+
 User.prototype.current_facet = function() {
   return Facet.findOne(this['profile']['current_facet']);
 }

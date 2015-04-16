@@ -8,10 +8,14 @@ function seedData() {
   var mike = User.createSeedUser("mike@mike.com");
   var john = User.createSeedUser("john@john.com");
   var joe = User.createSeedUser("joe@joe.com");
+  var andrew = User.createSeedUser("andrew@andrew.com");
 
-  matt.current_facet().addFriend(daria.current_facet())
-  matt.current_facet().addFriend(mike.current_facet())
-  daria.current_facet().addFriend(matt.current_facet())
+  matt.addFriend(daria.current_facet())
+  matt.addFriend(mike.current_facet())
+  matt.addFriend(john.current_facet())
+  matt.addFriend(joe.current_facet())
+  matt.addFriend(andrew.current_facet())
+  daria.addFriend(matt.current_facet())
 }
 
 if (Meteor.isServer) {
