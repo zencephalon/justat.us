@@ -15,7 +15,7 @@ Invite.create = function(o) {
   return new Invite(o);
 }
 
-Invite.prototype.accept() {
+Invite.prototype.accept = function() {
   var from_facet = Facet.findOne(this.from_facet);
   var to_facet = User.findOne(this.to).current_facet();
 
