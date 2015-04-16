@@ -14,3 +14,11 @@ Invite.create = function(o) {
 
   return new Invite(o);
 }
+
+Invite.prototype.accept() {
+  var from_facet = Facet.findOne(this.from_facet);
+  var to_facet = User.findOne(this.to).current_facet();
+
+  to_facet.addFriend(from_facet);
+  from_facet.addFriend(to_facet);
+}

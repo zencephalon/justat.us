@@ -21,14 +21,8 @@ function seedData() {
 if (Meteor.isServer) {
   Meteor.methods({
     acceptInvite: function(invite_id) {
-      invite = Invites.findOne(invite_id);
-      user = User.findOne(invite.to);
-      from_facet = Facet.findOne(invite.from_facet);
-      to_facet = user.current_facet();
-
-      to_facet.addFriend(from_facet);
-      from_facet.addFriend(to_facet);
-      
+      var invite = Invites.findOne(invite_id);
+      invite.accept();
       Invites.remove(invite_id);
       return "Added!";
     },
