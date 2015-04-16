@@ -4,6 +4,10 @@ User.current = function() {
   return new User(Meteor.user());
 }
 
+User.createSeedUser = function(email) {
+  return User.findOne(Accounts.createUser({email: email, password: "zen"}));
+}
+
 User.prototype.current_facet = function() {
   return Facet.findOne(this['profile']['current_facet']);
 }

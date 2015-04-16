@@ -3,13 +3,14 @@ function dropData() {
 }
 
 function seedData() {
-  var daria = User.findOne(Accounts.createUser({email: "djjcu2115@gmail.com", password: "zen"}));
-  uid = Accounts.createUser({email: "matt@matt.com", password: "zen"});
-  uid = Accounts.createUser({email: "daria@daria.com", password: "zen"});
-  uid = Accounts.createUser({email: "mike@mike.com", password: "zen"});
-  var matt = User.findOne(Accounts.createUser({email: "mkbunday@gmail.com", password: "zen"}));
+  var daria = User.createSeedUser("daria@daria.com");
+  var matt = User.createSeedUser("mkbunday@gmail.com");
+  var mike = User.createSeedUser("mike@mike.com");
+  var john = User.createSeedUser("john@john.com");
+  var joe = User.createSeedUser("joe@joe.com");
 
   matt.current_facet().addFriend(daria.current_facet())
+  matt.current_facet().addFriend(mike.current_facet())
   daria.current_facet().addFriend(matt.current_facet())
 }
 
